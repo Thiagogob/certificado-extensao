@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificado — Oficina Ecossistema Google na Prática</title>
+<meta name="description" content="Emissão de certificado da oficina Ecossistema Google na Prática — projeto de extensão do Curso de Sistemas de Informação (Unespar).">
+
+<!-- Fontes: Poppins (títulos/rótulos), Source Serif 4 (texto corrido), Parisienne (rubrica) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Parisienne&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Faixa de 5 cores: elemento que amarra todos os materiais da oficina -->
+<div class="faixa" aria-hidden="true">
+  <span class="faixa__cor faixa__cor--conta"></span>
+  <span class="faixa__cor faixa__cor--drive"></span>
+  <span class="faixa__cor faixa__cor--docs"></span>
+  <span class="faixa__cor faixa__cor--plan"></span>
+  <span class="faixa__cor faixa__cor--gemini"></span>
+</div>
+
+<main class="app" id="app">
+
+  <!-- ============ TELA 1: FORMULÁRIO ============ -->
+  <section class="tela" id="telaFormulario">
+    <h1 class="tela__titulo">Seu certificado</h1>
+    <p class="tela__subtitulo" id="tituloOficina">Oficina</p>
+
+    <form id="formNome" novalidate>
+      <label class="campo__rotulo" for="campoNome">
+        Digite seu nome completo, como você quer que apareça no certificado.
+      </label>
+      <input
+        class="campo"
+        id="campoNome"
+        name="nome"
+        type="text"
+        autocomplete="name"
+        autocapitalize="words"
+        spellcheck="false"
+        autocorrect="off"
+        enterkeyhint="go"
+        aria-describedby="avisoNome"
+        required>
+      <p class="campo__aviso" id="avisoNome">Escreva nome e sobrenome.</p>
+
+      <button class="botao botao--principal" id="botaoGerar" type="submit">
+        Gerar meu certificado
+      </button>
+    </form>
+
+    <p class="ajuda">
+      Alguma dificuldade? Fale com a organização:
+      <a class="ajuda__telefone" href="tel:+5542991640304">(42) 99164-0304</a>
+    </p>
+  </section>
+
+  <!-- ============ TELA 2: PRÉ-VISUALIZAÇÃO ============ -->
+  <section class="tela" id="telaPreview" hidden>
+    <h2 class="tela__titulo">Seu certificado está pronto</h2>
+    <p class="tela__subtitulo">Confira se o seu nome está escrito certo.</p>
+
+    <p class="nome-conferencia" id="nomeConferencia"></p>
+
+    <!-- Container de escala: o certificado tem tamanho fixo (297×210mm)
+         e é apenas reduzido na tela com transform:scale(). -->
+    <div class="folha-wrap" id="folhaWrap">
+      <div class="folha-escala" id="folhaEscala">
+
+        <!-- ===== CERTIFICADO — A4 paisagem ===== -->
+        <div class="pagina" id="certificado">
+          <div class="folha">
+
+            <div class="faixa faixa--certificado" aria-hidden="true">
+              <span class="faixa__cor faixa__cor--conta"></span>
+              <span class="faixa__cor faixa__cor--drive"></span>
+              <span class="faixa__cor faixa__cor--docs"></span>
+              <span class="faixa__cor faixa__cor--plan"></span>
+              <span class="faixa__cor faixa__cor--gemini"></span>
+            </div>
+
+            <header class="cab">
+              <img class="cab__logo" src="assets/unespar.png" alt="Unespar">
+              <div class="cab__texto">
+                <span data-campo="cabecalho1"></span>
+                <span data-campo="cabecalho2"></span>
+              </div>
+            </header>
+
+            <h1 class="cert__titulo">Certificado</h1>
+            <div class="cert__traco" aria-hidden="true"></div>
+
+            <p class="cert__intro">Certificamos que</p>
+
+            <p class="cert__nome" id="certNome">Nome do Participante</p>
+
+            <p class="cert__corpo" data-campo="corpo"></p>
+
+            <section class="conteudo">
+              <p class="conteudo__rotulo" data-campo="conteudoRotulo"></p>
+              <p class="conteudo__texto" data-campo="conteudoTexto"></p>
+            </section>
+
+            <div class="assinatura">
+              <span class="assinatura__rubrica" data-campo="rubrica"></span>
+              <div class="assinatura__linha">
+                <p class="assinatura__nome" data-campo="assinaturaNome"></p>
+                <p class="assinatura__cargo" data-campo="assinaturaCargo"></p>
+                <p class="assinatura__cargo" data-campo="assinaturaCurso"></p>
+              </div>
+            </div>
+
+            <footer class="rodape" data-campo="rodape"></footer>
+
+          </div>
+        </div>
+        <!-- ===== fim do certificado ===== -->
+
+      </div>
+    </div>
+
+    <button class="botao botao--principal" id="botaoBaixar" type="button">
+      Baixar PDF
+    </button>
+
+    <p class="dica" id="dicaDownload" hidden>
+      Pronto! O arquivo foi salvo na pasta <strong>Downloads</strong> do seu celular.
+    </p>
+
+    <button class="botao botao--secundario" id="botaoImprimir" type="button">
+      Imprimir
+    </button>
+
+    <button class="botao botao--texto" id="botaoCorrigir" type="button">
+      Corrigir meu nome
+    </button>
+  </section>
+
+</main>
+
+<!-- Bibliotecas de geração de PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="js/certificado.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+/* ==========================================================================
+   Certificado — Oficina "Ecossistema Google na Prática"
+   Identidade visual dos materiais impressos da oficina.
+
+   O arquivo tem duas partes bem separadas:
+     1. INTERFACE  — a página que o participante usa no celular.
+     2. CERTIFICADO — o documento A4 paisagem, em milímetros e pontos.
+
+   Regra importante: dentro do certificado nunca use px, rem ou em.
+   Só mm e pt. São unidades absolutas em CSS (1mm = 96/25.4 px), então o
+   certificado tem sempre o mesmo tamanho em qualquer aparelho — é isso que
+   faz o PDF sair idêntico no celular e no computador.
+   ========================================================================== */
+
+:root {
+  --tinta:       #12263F;  /* texto e traços principais */
+  --tinta-clara: #4A5A6E;  /* texto secundário */
+  --regua:       #D7DEE6;  /* linhas finas e bordas */
+  --caixa:       #F3F6F9;  /* fundo de blocos */
+  --conta:       #3F5AA6;
+  --drive:       #1E7A55;
+  --docs:        #2A6FB0;
+  --plan:        #B5670C;
+  --gemini:      #6E3E9C;
+
+  --titulo: 'Poppins', system-ui, sans-serif;
+  --texto:  'Source Serif 4', Georgia, serif;
+  --rubrica:'Parisienne', cursive;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  /* Público com pouca familiaridade com tecnologia: base grande. */
+  font-family: var(--titulo);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--tinta);
+  background: #fff;
+}
+
+/* ==========================================================================
+   1. FAIXA DE 5 CORES
+   Aparece no topo da página e no topo do certificado.
+   ========================================================================== */
+
+.faixa { display: flex; width: 100%; height: 8px; }
+.faixa__cor { flex: 1 1 20%; }
+.faixa__cor--conta  { background: var(--conta); }
+.faixa__cor--drive  { background: var(--drive); }
+.faixa__cor--docs   { background: var(--docs); }
+.faixa__cor--plan   { background: var(--plan); }
+.faixa__cor--gemini { background: var(--gemini); }
+
+/* ==========================================================================
+   2. INTERFACE
+   Uma coisa por vez na tela. Botões grandes. Contraste alto.
+   ========================================================================== */
+
+.app {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+}
+
+.tela__titulo {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 8px 0 4px;
+}
+
+.tela__subtitulo {
+  font-size: 19px;
+  color: var(--tinta-clara);
+  margin: 0 0 28px;
+}
+
+/* --- campo de nome --- */
+
+.campo__rotulo {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+
+.campo {
+  display: block;
+  width: 100%;
+  min-height: 62px;
+  padding: 12px 14px;
+  font-family: var(--titulo);
+  font-size: 22px;
+  color: var(--tinta);
+  background: #fff;
+  border: 2px solid var(--tinta);
+  border-radius: 10px;
+}
+
+.campo:focus {
+  outline: 4px solid var(--docs);
+  outline-offset: 2px;
+}
+
+.campo__aviso {
+  font-size: 17px;
+  color: var(--tinta-clara);
+  margin: 10px 0 24px;
+}
+
+.campo__aviso--erro {
+  color: #8A2B1F;
+  font-weight: 600;
+}
+
+/* --- botões --- */
+
+.botao {
+  display: block;
+  width: 100%;
+  min-height: 62px;
+  padding: 16px 18px;
+  margin-top: 16px;
+  font-family: var(--titulo);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.25;
+  border: 2px solid var(--tinta);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.botao--principal { color: #fff; background: var(--tinta); }
+.botao--secundario { color: var(--tinta); background: var(--caixa); }
+
+.botao--texto {
+  color: var(--tinta);
+  background: transparent;
+  border-color: transparent;
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.botao:focus-visible {
+  outline: 4px solid var(--docs);
+  outline-offset: 3px;
+}
+
+.botao[disabled] { opacity: .65; cursor: progress; }
+
+/* --- avisos e erro --- */
+
+.dica {
+  margin: 18px 0 0;
+  padding: 16px;
+  font-size: 19px;
+  line-height: 1.45;
+  background: var(--caixa);
+  border-left: 6px solid var(--drive);
+  border-radius: 6px;
+}
+
+/* Contato da organização, no pé do formulário. */
+.ajuda {
+  margin: 32px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--regua);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--tinta-clara);
+}
+
+.ajuda__telefone {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+/* Nome em letra grande: na tela do celular o certificado fica pequeno,
+   então o participante confere o nome aqui. */
+.nome-conferencia {
+  margin: 0 0 18px;
+  padding: 16px;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  background: var(--caixa);
+  border-radius: 10px;
+}
+
+/* --- área de pré-visualização --- */
+
+.folha-wrap {
+  width: 100%;
+  overflow: hidden;          /* recorta o certificado em tamanho natural */
+  border: 1px solid var(--regua);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.folha-escala {
+  transform-origin: top left;
+  /* a escala é calculada em js/certificado.js */
+}
+
+/* Telas muito estreitas (320px): sem margens extras roubando espaço. */
+@media (max-width: 360px) {
+  .app { padding: 22px 14px 56px; }
+  .tela__titulo { font-size: 26px; }
+}
+
+/* ==========================================================================
+   3. CERTIFICADO — A4 paisagem (297 × 210 mm)
+   ========================================================================== */
+
+.pagina {
+  width: 297mm;
+  height: 210mm;
+  background: #fff;
+  color: var(--tinta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folha {
+  position: relative;
+  width: 267mm;
+  height: 180mm;
+  border: 1.6pt solid var(--tinta);
+  padding: 11mm 14mm 9mm;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;   /* nada escapa da borda da folha */
+}
+
+/* Faixa colada no topo interno da borda. */
+/* Nenhum bloco do certificado pode ser esmagado pelo flex. */
+.folha > * { flex-shrink: 0; }
+
+.faixa--certificado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5mm;
+}
+
+/* --- cabeçalho --- */
+
+.cab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8mm;
+}
+
+.cab__logo {
+  height: 26mm;   /* o logo da Unespar é vertical: abaixo disso a marca some */
+  width: auto;
+  display: block;
+}
+
+.cab__texto {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-family: var(--titulo);
+  font-size: 8.4pt;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tinta-clara);
+}
+
+/* --- título --- */
+
+.cert__titulo {
+  margin: 4mm 0 0;
+  font-family: var(--titulo);
+  font-size: 26pt;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-align: center;
+  /* letter-spacing empurra o texto para a direita; compensa o recuo. */
+  text-indent: .22em;
+}
+
+.cert__traco {
+  width: 34mm;
+  height: 2pt;
+  margin: 3.5mm auto 0;
+  background: var(--tinta);
+}
+
+/* --- nome --- */
+
+.cert__intro {
+  margin: 4mm 0 0;
+  font-family: var(--texto);
+  font-size: 12.4pt;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.cert__nome {
+  width: 180mm;
+  margin: 3mm auto 0;
+  padding-bottom: 2mm;
+  border-bottom: 1pt solid var(--regua);
+  font-family: var(--titulo);
+  font-size: 22pt;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* --- corpo --- */
+
+.cert__corpo {
+  max-width: 210mm;
+  margin: 3.5mm auto 0;
+  font-family: var(--texto);
+  font-size: 12.4pt;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.cert__corpo strong {
+  font-family: var(--titulo);
+  font-weight: 600;
+}
+
+/* --- conteúdo desenvolvido --- */
+
+.conteudo {
+  max-width: 100%;
+  margin: 4mm auto 0;
+  padding-top: 3mm;
+  border-top: 0.8pt solid var(--regua);
+  text-align: center;
+}
+
+.conteudo__rotulo {
+  margin: 0 0 1.5mm;
+  font-family: var(--titulo);
+  font-size: 8.2pt;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--tinta);
+}
+
+.conteudo__texto {
+  margin: 0;
+  font-family: var(--titulo);
+  font-size: 9.6pt;
+  line-height: 1.35;
+  color: var(--tinta-clara);
+}
+
+/* --- assinatura --- */
+
+.assinatura {
+  width: 100mm;
+  margin: 5mm auto 0;
+  text-align: center;
+}
+
+.assinatura__rubrica {
+  display: block;
+  font-family: var(--rubrica);
+  font-size: 24pt;
+  line-height: 1;
+  color: #1B3A63;
+  transform: rotate(-1.4deg);
+  /* encosta a rubrica logo acima da linha */
+  margin-bottom: -0.6mm;
+}
+
+.assinatura__linha { border-top: 0.9pt solid var(--tinta); padding-top: 2mm; }
+
+.assinatura__nome {
+  margin: 0;
+  font-family: var(--titulo);
+  font-size: 9.4pt;
+  font-weight: 600;
+}
+
+.assinatura__cargo {
+  margin: 0.4mm 0 0;
+  font-family: var(--titulo);
+  font-size: 8.6pt;
+  line-height: 1.35;
+  color: var(--tinta-clara);
+}
+
+/* --- rodapé --- */
+
+.rodape {
+  margin-top: auto;          /* sempre colado na base da folha */
+  padding-top: 2mm;
+  border-top: 0.8pt solid var(--regua);
+  font-family: var(--titulo);
+  font-size: 8pt;
+  text-align: center;
+  color: var(--tinta-clara);
+}
+
+/* ==========================================================================
+   4. CAPTURA (geração do PDF)
+   Enquanto o html2canvas fotografa o certificado, ele precisa estar em
+   tamanho natural e sem recorte.
+   ========================================================================== */
+
+body.em-captura .folha-wrap { overflow: visible; height: auto !important; border: 0; }
+body.em-captura .folha-escala { transform: none !important; }
+
+/* ==========================================================================
+   5. IMPRESSÃO — caminho de reserva se o download falhar
+   ========================================================================== */
+
+@page { size: A4 landscape; margin: 0; }
+
+@media print {
+  body { background: #fff; }
+  body > .faixa,
+  .tela__titulo,
+  .tela__subtitulo,
+  .nome-conferencia,
+  .botao,
+  .dica,
+  .ajuda,
+  #telaFormulario { display: none !important; }
+
+  .app { max-width: none; margin: 0; padding: 0; }
+  .folha-wrap { overflow: visible; height: auto !important; border: 0; border-radius: 0; }
+  .folha-escala { transform: none !important; }
+  .pagina { page-break-after: avoid; }
+}
